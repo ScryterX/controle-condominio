@@ -37,7 +37,7 @@ public class ParkingSpotService {
         return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
     }
 
-    public Optional<ParkingSpotModel> findById(UUID id) {
+    public Optional<ParkingSpotModel> findById(/*long*/UUID id) {
         return parkingSpotRepository.findById(id);
     }
 

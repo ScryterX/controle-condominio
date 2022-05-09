@@ -50,7 +50,7 @@ public class ParkingSpotController {
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") UUID id)
+    public  ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") /*long*/UUID id)
     {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
         if(!parkingSpotModelOptional.isPresent()){
@@ -59,13 +59,23 @@ public class ParkingSpotController {
     }
 
     @DeleteMapping("/{id}")
-    public  ResponseEntity<Object> deleteOneParkingSpot(@PathVariable(value = "id") UUID id)
+    public  ResponseEntity<Object> deleteOneParkingSpot(@PathVariable(value = "id") /*long*/UUID id)
     {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
         if(!parkingSpotModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Oops! Vaga de estacionamento não encontrada");}
         parkingSpotService.delete(parkingSpotModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("vaga de estacionamento deletada");
+    }
+
+    @PutMapping("/{id}")
+    public  ResponseEntity<Object> deleteOneParkingSpot(@PathVariable(value = "id") /*long*/UUID id, @RequestBody @Valid ParkingSpotDto parkingSpotDto)
+    {
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
+        if(!parkingSpotModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Oops! Vaga de estacionamento não encontrada");}
+        var parkingSpotModel = new ParkingSpotModel();
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModel));
     }
 
 

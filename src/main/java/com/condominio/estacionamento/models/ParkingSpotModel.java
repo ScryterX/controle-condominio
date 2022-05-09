@@ -1,6 +1,7 @@
 package com.condominio.estacionamento.models;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,10 +13,14 @@ import java.util.UUID;
 public class ParkingSpotModel {
     private static final long serialVersionUID = 1L;
 
+//    @Id
+//    @Column(name = "id", nullable = false)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    private /*long*/UUID id;
     @Column(nullable = false, unique = true, length = 10)
     private String parkingSpotNumber;
     @Column(nullable = false, unique = true, length = 7)
