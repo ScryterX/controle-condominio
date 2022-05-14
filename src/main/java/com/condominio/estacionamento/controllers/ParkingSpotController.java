@@ -63,7 +63,7 @@ public class ParkingSpotController {
     {
         Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
         if(!parkingSpotModelOptional.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Oops! Vaga de estacionamento não encontrada");}
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Oops! Vaga de estacionamento não encontrada. Não foi possível deletar");}
         parkingSpotService.delete(parkingSpotModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("vaga de estacionamento deletada");
     }
